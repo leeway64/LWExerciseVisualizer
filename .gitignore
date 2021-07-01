@@ -1,2 +1,5 @@
 # Python files
 .venv/
+
+# Microsoft Office files
+~$*.xlsx
