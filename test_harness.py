@@ -1,5 +1,5 @@
 import pandas as pd
-from Exercise_Visualizer import cell_to_list, sum_row
+from Exercise_Visualizer import cell_to_list, sum_row, sum_column
 
 # Test harness
 df = pd.read_excel(r'C:\Users\leewa\Documents\Important documents\Computer Science\Python Projects\Exercise_Tracking_and_Visualization\Exercise tracking (testing version).xlsx')
@@ -18,8 +18,10 @@ assert cell_to_list("[10,2,38,900,1000000]") == [10,2,38,900,1000000]
 # Testing sum_row function
 assert sum_row(df.iloc[0]) == 8
 assert sum_row(df.iloc[1]) == 19
-assert sum_row(df.iloc[2]) == 6
+assert sum_row(df.iloc[2]) == 4
 
 
 # Testing sum_column function
-assert sum_col() == 23
+assert sum_column(df['Running']) == 23
+assert sum_column(df['Strength']) == 12
+assert sum_column(df['Testing1']) == 0

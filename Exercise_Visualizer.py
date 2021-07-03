@@ -1,6 +1,7 @@
 # This program visualizes several exercise statistics
 
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Converts an Excel spreadsheet's cell into a list
 # cell is a string
@@ -54,6 +55,7 @@ def frequency_vs_exercise_type(DF):
     frequency_of_exercise = dict()
     for exercise in exercise_list:
         frequency_of_exercise[exercise] = sum_column(DF[exercise])
+
 
 
 # Highlight the days of the year where I exercised
