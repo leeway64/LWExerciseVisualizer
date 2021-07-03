@@ -1,5 +1,6 @@
 # Python files
 .venv/
+__pycache__/
 
 # Microsoft Office files
 ~$*.xlsx
