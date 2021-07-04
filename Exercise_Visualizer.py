@@ -1,5 +1,6 @@
 # This program visualizes several exercise statistics
 
+import collections
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -52,10 +53,17 @@ def frequency_vs_day_chart(DF):
 # Create bar chart of how many times I've done each type of exercise
 def frequency_vs_exercise_type(DF):
     exercise_list = list(DF.columns)[2:]  # Ignore the year and month columns
-    frequency_of_exercise = dict()
+    frequency_of_exercise = collections.OrderedDict()
     for exercise in exercise_list:
         frequency_of_exercise[exercise] = sum_column(DF[exercise])
 
+    plt.style.use("fivethirtyeight")
+    plt.figure()
+    plt.bar(frequency_of_exercise.keys(), frequency_of_exercise.values(), color='Orange')
+    plt.title('Frequency of each type of exercise')
+    plt.xlabel('Exercise type')
+    plt.ylabel('Frequency')
+    plt.show()
 
 
 # Highlight the days of the year where I exercised
@@ -64,12 +72,13 @@ def print_exercise_days(DF):
 
 
 def main():
-    exercise_data = pd.read_excel(r'C:\Users\leewa\Documents\Important documents\Computer Science\Python Projects\Exercise_Tracking_and_Visualization\Exercise tracking.xlsx')
+    exercise_data = pd.read_excel(r'C:\Users\leewa\Documents\Important documents\Computer Science\Python Projects\Exercise_Tracking_and_Visualization\Exercise tracking (testing version).xlsx')
     exercise_data.drop(exercise_data.columns[exercise_data.columns.str.contains('unnamed', case = False)], axis = 1, inplace = True)
     exercise_data.reset_index(drop = True, inplace=True)
     frequency_vs_months_chart(exercise_data)
     frequency_vs_day_chart(exercise_data)
     frequency_vs_exercise_type(exercise_data)
+    print_exercise_days(exercise_data)
 
 
 if __name__ == '__main__':
