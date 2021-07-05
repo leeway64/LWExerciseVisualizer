@@ -1,8 +1,10 @@
 # This program visualizes several exercise statistics
 
+import datetime
 import collections
 import pandas as pd
 import matplotlib.pyplot as plt
+
 
 # Converts an Excel spreadsheet's cell into a list
 # cell is a string
@@ -38,6 +40,38 @@ def sum_row(row):
     return sum
 
 
+def month_to_number_dict():
+    month_to_number = {'January': 1,
+    'February': 2,
+    'March': 3,
+    'April': 4,
+    'May': 5,
+    'June': 6,
+    'July': 7,
+    'August': 8,
+    'September': 9,
+    'October': 10,
+    'November': 11,
+    'December': 12}
+    return month_to_number
+
+
+def number_to_weekday_dict():
+    number_to_weekday_dict = {'0': 'Monday',
+    '1': 'Tuesday',
+    '2': 'Wednesday',
+    '3': 'Thursday',
+    '4': 'Friday',
+    '5': 'Saturday',
+    '6': 'Sunday'}
+    return number_to_weekday_dict
+
+
+# Returns the day of the week, based on the year, month, and day (all ints), as a string
+def find_day_of_week(year, month, day):
+    return number_to_weekday_dict()[datetime.date(year, month, day).weekday()]
+
+
 # Create graph of times exercised vs. the month
 def frequency_vs_months_chart(DF):
     days_exercised_in_month = {}
@@ -47,7 +81,34 @@ def frequency_vs_months_chart(DF):
 
 # Create bar chart of times exercised in each day of the week
 def frequency_vs_day_chart(DF):
-    pass
+    month_dict = month_to_number_dict()
+    times_exercied_in_day_of_week = collections.OrderedDict()
+
+    times_exercied_in_day_of_week = {'Sunday': 0,
+    'Monday': 0,
+    'Tuesday': 0,
+    'Wednesday': 0,
+    'Thursday': 0,
+    'Friday': 0,
+    'Saturday': 0}
+
+    for row in DF.iloc:
+        year = row[0]
+        month = month_to_number_dict()[row[1]]
+        for cell in row[2:0]:
+            days = cell_to_list(cell)
+            for day in days:
+                weekday = find_day_of_week(year, month, day)
+                times_exercied_in_day_of_week[weekday] = 1 + times_exercied_in_day_of_week[weekday]
+        
+        
+    plt.style.use("ggplot")
+    plt.figure()
+    plt.bar(times_exercied_in_day_of_week.keys(), times_exercied_in_day_of_week.values())
+    plt.title('Times exercised for each day of week')
+    plt.xlabel('Day of week')
+    plt.ylabel('Times exercised')
+    plt.show()
 
 
 # Create bar chart of how many times I've done each type of exercise
@@ -74,7 +135,6 @@ def print_exercise_days(DF):
 def main():
     exercise_data = pd.read_excel(r'C:\Users\leewa\Documents\Important documents\Computer Science\Python Projects\Exercise_Tracking_and_Visualization\Exercise tracking (testing version).xlsx')
     exercise_data.drop(exercise_data.columns[exercise_data.columns.str.contains('unnamed', case = False)], axis = 1, inplace = True)
-    exercise_data.reset_index(drop = True, inplace=True)
     frequency_vs_months_chart(exercise_data)
     frequency_vs_day_chart(exercise_data)
     frequency_vs_exercise_type(exercise_data)
