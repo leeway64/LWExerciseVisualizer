@@ -1,10 +1,10 @@
-import pandas as pd
-from Exercise_Visualizer import cell_to_list, sum_row, sum_column
-
 # Test harness
+
+import pandas as pd
+from Exercise_Visualizer import add_to_weekdays_exercised_dict, cell_to_list, find_day_of_week, sum_row, sum_column
+
 df = pd.read_excel(r'C:\Users\leewa\Documents\Important documents\Computer Science\Python Projects\Exercise_Tracking_and_Visualization\Exercise tracking (testing version).xlsx')
 df.drop(df.columns[df.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
-df.reset_index(drop = True, inplace=True)
 
 
 # Testing cell_to_list function
@@ -25,3 +25,25 @@ assert sum_row(df.iloc[2]) == 4
 assert sum_column(df['Running']) == 23
 assert sum_column(df['Strength']) == 12
 assert sum_column(df['Testing1']) == 0
+
+
+# Testing find_day_of_week function
+assert find_day_of_week(2021, 7, 5) == 'Monday'
+assert find_day_of_week(2021, 7, 4) == 'Sunday'
+assert find_day_of_week(2020, 4, 1) == 'Wednesday'
+assert find_day_of_week(2019, 6, 7) == 'Friday'
+
+
+# Testing add_to_weekdays_exercised_dict function
+times_exercised_in_day_of_week = {'Sunday': 0,
+'Monday': 0,
+'Tuesday': 0,
+'Wednesday': 0,
+'Thursday': 0,
+'Friday': 0,
+'Saturday': 0}
+
+times_exercised_in_day_of_week = add_to_weekdays_exercised_dict(
+                                      times_exercised_in_day_of_week, 2021, 7, list(range(4, 11)))
+
+

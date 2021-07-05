@@ -40,6 +40,11 @@ def sum_row(row):
     return sum
 
 
+# Returns the day of the week, based on the year, month, and day (all ints), as a string
+def find_day_of_week(year, month, day):
+    return number_to_weekday_dict()[datetime.date(year, month, day).weekday()]
+
+
 def month_to_number_dict():
     month_to_number = {'January': 1,
     'February': 2,
@@ -57,19 +62,21 @@ def month_to_number_dict():
 
 
 def number_to_weekday_dict():
-    number_to_weekday_dict = {'0': 'Monday',
-    '1': 'Tuesday',
-    '2': 'Wednesday',
-    '3': 'Thursday',
-    '4': 'Friday',
-    '5': 'Saturday',
-    '6': 'Sunday'}
+    number_to_weekday_dict = {0: 'Monday',
+    1: 'Tuesday',
+    2: 'Wednesday',
+    3: 'Thursday',
+    4: 'Friday',
+    5: 'Saturday',
+    6: 'Sunday'}
     return number_to_weekday_dict
 
 
-# Returns the day of the week, based on the year, month, and day (all ints), as a string
-def find_day_of_week(year, month, day):
-    return number_to_weekday_dict()[datetime.date(year, month, day).weekday()]
+def add_to_weekdays_exercised_dict(dictionary, year, month, days_list):
+    for day in days_list:
+        weekday = find_day_of_week(year, month, day)
+        dictionary[weekday] = 1 + dictionary[weekday]
+    return dictionary
 
 
 # Create graph of times exercised vs. the month
@@ -82,9 +89,9 @@ def frequency_vs_months_chart(DF):
 # Create bar chart of times exercised in each day of the week
 def frequency_vs_day_chart(DF):
     month_dict = month_to_number_dict()
-    times_exercied_in_day_of_week = collections.OrderedDict()
+    times_exercised_in_day_of_week = collections.OrderedDict()
 
-    times_exercied_in_day_of_week = {'Sunday': 0,
+    times_exercised_in_day_of_week = {'Sunday': 0,
     'Monday': 0,
     'Tuesday': 0,
     'Wednesday': 0,
@@ -95,16 +102,16 @@ def frequency_vs_day_chart(DF):
     for row in DF.iloc:
         year = row[0]
         month = month_to_number_dict()[row[1]]
-        for cell in row[2:0]:
+        for cell in row[2:0]:  # First 2 elements are the year and month
             days = cell_to_list(cell)
-            for day in days:
-                weekday = find_day_of_week(year, month, day)
-                times_exercied_in_day_of_week[weekday] = 1 + times_exercied_in_day_of_week[weekday]
-        
-        
+            times_exercised_in_day_of_week = add_to_weekdays_exercised_dict(
+                                                    times_exercised_in_day_of_week, year, month, days)
+    print(times_exercised_in_day_of_week.values())
+    keys_list = list(times_exercised_in_day_of_week.keys())
+    values_list = list(times_exercised_in_day_of_week.values())
     plt.style.use("ggplot")
     plt.figure()
-    plt.bar(times_exercied_in_day_of_week.keys(), times_exercied_in_day_of_week.values())
+    plt.bar(keys_list, values_list, color= 'blue')
     plt.title('Times exercised for each day of week')
     plt.xlabel('Day of week')
     plt.ylabel('Times exercised')
