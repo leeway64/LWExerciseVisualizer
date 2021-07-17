@@ -90,19 +90,18 @@ def frequency_vs_months_chart(DF):
 def frequency_vs_day_chart(DF):
     month_dict = month_to_number_dict()
     times_exercised_in_day_of_week = collections.OrderedDict()
-
     times_exercised_in_day_of_week = {'Sunday': 0,
-    'Monday': 0,
-    'Tuesday': 0,
-    'Wednesday': 0,
-    'Thursday': 0,
-    'Friday': 0,
-    'Saturday': 0}
+                                        'Monday': 0,
+                                        'Tuesday': 0,
+                                        'Wednesday': 0,
+                                        'Thursday': 0,
+                                        'Friday': 0,
+                                        'Saturday': 0}
 
     for row in DF.iloc:
         year = row[0]
         month = month_to_number_dict()[row[1]]
-        for cell in row[2:0]:  # First 2 elements are the year and month
+        for cell in row[2:]:  # First 2 elements are the year and month
             days = cell_to_list(cell)
             times_exercised_in_day_of_week = add_to_weekdays_exercised_dict(
                                                     times_exercised_in_day_of_week, year, month, days)
@@ -140,7 +139,7 @@ def print_exercise_days(DF):
 
 
 def main():
-    exercise_data = pd.read_excel(r'C:\Users\leewa\Documents\Important documents\Computer Science\Python Projects\Exercise_Tracking_and_Visualization\Exercise tracking (testing version).xlsx')
+    exercise_data = pd.read_excel('Exercise tracking (testing version).xlsx')
     exercise_data.drop(exercise_data.columns[exercise_data.columns.str.contains('unnamed', case = False)], axis = 1, inplace = True)
     frequency_vs_months_chart(exercise_data)
     frequency_vs_day_chart(exercise_data)
