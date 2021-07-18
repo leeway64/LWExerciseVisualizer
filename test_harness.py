@@ -3,7 +3,7 @@
 import pandas as pd
 from Exercise_Visualizer import add_to_weekdays_exercised_dict, cell_to_list, find_day_of_week, sum_row, sum_column
 
-df = pd.read_excel('Exercise tracking (testing version).xlsx')
+df = pd.read_excel('Exercise tracking (testing version 1).xlsx')
 df.drop(df.columns[df.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
 
 
