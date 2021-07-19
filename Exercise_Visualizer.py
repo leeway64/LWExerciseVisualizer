@@ -154,7 +154,13 @@ def frequency_vs_exercise_type(DF):
 
 # Highlight the days of the year where I exercised
 def print_exercise_days(DF):
-    pass
+    month_dict = month_to_number_dict()
+    date = datetime.date(2021, 7, 18)
+    for row in DF.iloc:  # For each row in the data
+        year = row[0]
+        month = month_dict[row[1]]
+        for cell in row[2:]:  # First 2 elements are the year and month
+            pass
 
 
 def main():
