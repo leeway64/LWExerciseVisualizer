@@ -1,7 +1,7 @@
 # Test harness
 
 import pandas as pd
-from Exercise_Visualizer import add_to_weekdays_exercised_dict, cell_to_list, find_day_of_week, sum_row, sum_column
+from Exercise_Visualizer import add_to_weekdays_exercised_dict, cell_to_list, find_day_of_week, read_data, sum_row, sum_column
 
 df = pd.read_excel('Exercise tracking (testing version 1).xlsx')
 df.drop(df.columns[df.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
@@ -48,3 +48,12 @@ times_exercised_in_day_of_week = add_to_weekdays_exercised_dict(
 
 for key in times_exercised_in_day_of_week.keys():
     assert times_exercised_in_day_of_week[key] == 1
+
+
+# Manual functional testing
+# Testing frequency vs. months
+exercise_data1 = read_data('Exercise tracking (testing version 1).xlsx')
+exercise_data2 = read_data('Exercise tracking (testing version 2).xlsx')
+
+# Testing frequency vs. day
+# Testing frequency vs. exercise type

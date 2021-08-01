@@ -163,9 +163,17 @@ def print_exercise_days(DF):
             pass
 
 
+# Returns a pandas DataFrame of the data in file_name, an Excel spreadsheet holding the exercise
+# data 
+def read_data(file_name):
+    exercise_data = pd.read_excel(file_name)
+    exercise_data.drop(exercise_data.columns[exercise_data.columns.str.contains('unnamed',
+                                                            case = False)], axis = 1, inplace = True)
+    return exercise_data
+
+
 def main():
-    exercise_data = pd.read_excel('Exercise tracking (testing version 1).xlsx')
-    exercise_data.drop(exercise_data.columns[exercise_data.columns.str.contains('unnamed', case = False)], axis = 1, inplace = True)
+    exercise_data = read_data('Exercise tracking (testing version 1).xlsx')
     frequency_vs_months_chart(exercise_data)
     frequency_vs_day_chart(exercise_data)
     frequency_vs_exercise_type(exercise_data)
