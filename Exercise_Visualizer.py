@@ -1,5 +1,6 @@
 # This program visualizes several exercise statistics
 
+from functools import reduce
 import datetime
 import collections
 import pandas as pd
@@ -25,44 +26,28 @@ def cell_to_list(cell):
 
 # Finds the sum of the lengths of all the lists in a column
 def sum_column(column):
-    sum = 0
-    for cell in column:
-        sum = len(cell_to_list(cell)) + sum
+    sum = reduce(lambda x, y: x + len(cell_to_list(y)), column, 0)  # Initialize sum to 0
     return sum
 
 
 # Finds the sum of the lengths of all the lists in a row
 def sum_row(row):
-    sum = 0
     row = row[2:]  # First 2 rows will always be year and month
-    for cell in row:
-        sum = len(cell_to_list(cell)) + sum
+    sum = reduce(lambda x, y: x + len(cell_to_list(y)), row, 0)
     return sum
 
 
 def month_to_number_dict():
-    month_to_number = {'January': 1,
-                        'February': 2,
-                        'March': 3,
-                        'April': 4,
-                        'May': 5,
-                        'June': 6,
-                        'July': 7,
-                        'August': 8,
-                        'September': 9,
-                        'October': 10,
-                        'November': 11,
-                        'December': 12}
+    month_to_number = {'January': 1, 'February': 2, 'March': 3, 'April': 4,
+                        'May': 5, 'June': 6, 'July': 7, 'August': 8,
+                        'September': 9, 'October': 10, 'November': 11, 'December': 12}
     return month_to_number
 
 
 def number_to_weekday_dict():
-    number_to_weekday_dict = {0: 'Monday',
-                                1: 'Tuesday',
-                                2: 'Wednesday',
-                                3: 'Thursday',
-                                4: 'Friday',
-                                5: 'Saturday',
+    number_to_weekday_dict = {0: 'Monday', 1: 'Tuesday',
+                                2: 'Wednesday', 3: 'Thursday',
+                                4: 'Friday', 5: 'Saturday',
                                 6: 'Sunday'}
     return number_to_weekday_dict
 
@@ -110,12 +95,9 @@ def frequency_vs_months_chart(DF):
 def frequency_vs_day_chart(DF):
     month_dict = month_to_number_dict()
     times_exercised_in_day_of_week = collections.OrderedDict()
-    times_exercised_in_day_of_week = {'Sunday': 0,
-                                        'Monday': 0,
-                                        'Tuesday': 0,
-                                        'Wednesday': 0,
-                                        'Thursday': 0,
-                                        'Friday': 0,
+    times_exercised_in_day_of_week = {'Sunday': 0, 'Monday': 0,
+                                        'Tuesday': 0, 'Wednesday': 0,
+                                        'Thursday': 0, 'Friday': 0,
                                         'Saturday': 0}
     for row in DF.iloc:  # For each row in the data
         year = row[0]

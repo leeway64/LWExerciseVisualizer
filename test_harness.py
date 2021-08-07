@@ -37,12 +37,9 @@ class TestExerciseVisualizerMethods(unittest.TestCase):
         self.assertEqual(find_day_of_week(2019, 6, 7), 'Friday')
 
     def test_add_to_weekdays_exercised_dict(self):
-        times_exercised_in_day_of_week = {'Sunday': 0,
-                                            'Monday': 0,
-                                            'Tuesday': 0,
-                                            'Wednesday': 0,
-                                            'Thursday': 0,
-                                            'Friday': 0,
+        times_exercised_in_day_of_week = {'Sunday': 0, 'Monday': 0,
+                                            'Tuesday': 0, 'Wednesday': 0,
+                                            'Thursday': 0, 'Friday': 0,
                                             'Saturday': 0}
 
         times_exercised_in_day_of_week = add_to_weekdays_exercised_dict(
@@ -52,10 +49,8 @@ class TestExerciseVisualizerMethods(unittest.TestCase):
             self.assertEqual(times_exercised_in_day_of_week[key], 1)
 
 
-def main():
-    unittest.main()
-
-    # Manual functional testing (uncomment unittest.main() to run)
+# Manual functional testing (comment out unittest.main() to run)
+def functional_tests():
     exercise_data1 = read_data('Exercise tracking (testing version 1).xlsx')
     exercise_data2 = read_data('Exercise tracking (testing version 2).xlsx')
 
@@ -70,4 +65,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    unittest.main()
+    # functional_tests()
