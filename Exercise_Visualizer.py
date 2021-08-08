@@ -105,7 +105,7 @@ def frequency_vs_day_chart(DF):
         for cell in row[2:]:  # First 2 elements are the year and month
             days = cell_to_list(cell)
             times_exercised_in_day_of_week = add_to_weekdays_exercised_dict(
-                                                    times_exercised_in_day_of_week, year, month, days)
+                                                times_exercised_in_day_of_week, year, month, days)
 
     keys_list = list(times_exercised_in_day_of_week.keys())
     values_list = list(times_exercised_in_day_of_week.values())
@@ -155,7 +155,7 @@ def read_data(file_name):
 
 
 def main():
-    exercise_data = read_data('Exercise tracking (testing version 1).xlsx')
+    exercise_data = read_data('Exercise tracker.xlsx')
     frequency_vs_months_chart(exercise_data)
     frequency_vs_day_chart(exercise_data)
     frequency_vs_exercise_type(exercise_data)
