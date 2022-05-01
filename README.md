@@ -1,14 +1,14 @@
 # Exercise Tracking and Visualization
 
 This project provides a way to track and visualize your exercise habits. It provides 3 charts for
-visualizing exercise habits.
+visualizing your exercises.
 
 
 ## Setup
 
 Assuming you are using a Linux machine:
 
-```
+```sh
 $ python3 -m venv .venv
 $ source .venv/bin/activate
 $ pip3 install -r requirements.txt
@@ -16,11 +16,13 @@ $ pip3 install -r requirements.txt
 
 ## Usage
 
-```
+```sh
 $ python3 
 ```
 
 You should then see 3 plots appear, one at a time, one after the other.
+
+## Plots
 
 The first plots the number of times you exercised versus the month.
 
@@ -44,6 +46,16 @@ the year and month represents an exercise; remove or add rows as required for yo
 and needs. Each cell in the exercise columns should be a comma separated list of integers, surrounded
 by brackets, that represent the days exercised for that particular year and month.
 
+
+## Running Tests
+
+To run unit tests:
+
+```sh
+$ python3
+```
+
+To run functional tests, comment out `unittest.main()` in test/test_suite.py and rerun the previous commands.
 
 ## Third-Party Tools
 

@@ -51,8 +51,8 @@ class TestExerciseVisualizerMethods(unittest.TestCase):
 
 # Manual functional testing (comment out unittest.main() to run)
 def functional_tests():
-    exercise_data1 = read_data('Exercise tracking (testing version 1).xlsx')
-    exercise_data2 = read_data('Exercise tracking (testing version 2).xlsx')
+    exercise_data1 = read_data('exercise_tracking_test_1.xlsx')
+    exercise_data2 = read_data('exercise_tracking_test_2.xlsx')
 
     # Testing frequency vs. months
     frequency_vs_months_chart(exercise_data1)
