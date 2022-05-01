@@ -65,5 +65,5 @@ def functional_tests():
 
 
 if __name__ == '__main__':
-    unittest.main()
-    # functional_tests()
+    # unittest.main()
+    functional_tests()
