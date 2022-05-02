@@ -1,14 +1,11 @@
-# Test harness
-
 import unittest
 import pandas as pd
-from Exercise_Visualizer import add_to_weekdays_exercised_dict, cell_to_list,\
-        find_day_of_week, read_data, sum_row, sum_column, frequency_vs_months_chart,\
-        frequency_vs_day_chart, frequency_vs_exercise_type
+import os
+import sys
+from LWExerciseVisualizer import *
 
 
 class TestExerciseVisualizerMethods(unittest.TestCase):
-    
     def test_cell_to_list(self):
         self.assertEqual(cell_to_list("[]"), [])
         self.assertEqual(cell_to_list("[10101010100]"), [10101010100])
@@ -17,14 +14,14 @@ class TestExerciseVisualizerMethods(unittest.TestCase):
         self.assertEqual(cell_to_list("[10,2,38,900,1000000]"), [10,2,38,900,1000000])
     
     def test_sum_row(self):
-        df = pd.read_excel('Exercise tracking (testing version 1).xlsx')
+        df = pd.read_excel(f'{os.path.dirname(__file__)}/exercise_tracking_test_1.xlsx')
         df.drop(df.columns[df.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
         self.assertEqual(sum_row(df.iloc[0]), 8)
         self.assertEqual(sum_row(df.iloc[1]), 19)
         self.assertEqual(sum_row(df.iloc[2]), 4)
     
     def test_sum_column(self):
-        df = pd.read_excel('Exercise tracking (testing version 1).xlsx')
+        df = pd.read_excel(f'{os.path.dirname(__file__)}/exercise_tracking_test_1.xlsx')
         df.drop(df.columns[df.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
         self.assertEqual(sum_column(df['Running']), 23)
         self.assertEqual(sum_column(df['Strength']), 12)
@@ -51,8 +48,8 @@ class TestExerciseVisualizerMethods(unittest.TestCase):
 
 # Manual functional testing (comment out unittest.main() to run)
 def functional_tests():
-    exercise_data1 = read_data('exercise_tracking_test_1.xlsx')
-    exercise_data2 = read_data('exercise_tracking_test_2.xlsx')
+    exercise_data1 = read_data(f'{os.path.dirname(__file__)}/exercise_tracking_test_1.xlsx')
+    exercise_data2 = read_data(f'{os.path.dirname(__file__)}/exercise_tracking_test_2.xlsx')
 
     # Testing frequency vs. months
     frequency_vs_months_chart(exercise_data1)
@@ -65,5 +62,9 @@ def functional_tests():
 
 
 if __name__ == '__main__':
-    # unittest.main()
-    functional_tests()
+    if len(sys.argv) != 2:
+        raise RuntimeError("Incorrect number of arguments! Provide the name of the file that contains the names.")
+        
+    unittest.main()
+    #functional_tests()
+
