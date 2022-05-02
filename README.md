@@ -52,10 +52,17 @@ by brackets, that represent the days exercised for that particular year and mont
 To run unit tests:
 
 ```sh
-$ python3
+$ python3 include/test_suite.py unit
 ```
 
-To run functional tests, comment out `unittest.main()` in test/test_suite.py and rerun the previous commands.
+
+To run functional tests:
+
+```sh
+$ python3 include/test_suite.py func
+```
+
+You will then see 3 plots appear, one after the other.
 
 ## Third-Party Tools
 

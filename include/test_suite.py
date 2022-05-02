@@ -63,8 +63,13 @@ def functional_tests():
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
-        raise RuntimeError("Incorrect number of arguments! Provide the name of the file that contains the names.")
-        
-    unittest.main()
-    #functional_tests()
+        raise RuntimeError("Incorrect number of arguments! Enter either unit (for unit testing) or func (for functional testing).")
+    
+    if sys.argv[1] == "unit":
+        print("Running unit tests:")
+        unittest.main(argv=['first-arg-is-ignored'], exit=False)
+    elif sys.argv[1] == "func":
+        functional_tests()
+    else:
+        raise RuntimeError("Enter either unit (for unit testing) or func (for functional testing).")
 
