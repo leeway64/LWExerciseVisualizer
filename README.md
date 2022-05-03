@@ -1,4 +1,4 @@
-# Exercise Tracking and Visualization
+# LWExerciseVisualizer
 
 This project provides a way to track and visualize your exercise habits. It provides 3 charts for
 visualizing your exercises.
