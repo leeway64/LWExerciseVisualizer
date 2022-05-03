@@ -69,6 +69,7 @@ if __name__ == '__main__':
         print("Running unit tests:")
         unittest.main(argv=['first-arg-is-ignored'], exit=False)
     elif sys.argv[1] == "func":
+        print("Running functional tests:")
         functional_tests()
     else:
         raise RuntimeError("Enter either unit (for unit testing) or func (for functional testing).")

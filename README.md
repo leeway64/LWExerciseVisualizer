@@ -17,7 +17,7 @@ $ pip3 install -r requirements.txt
 ## Usage
 
 ```sh
-$ python3 
+$ python3 include/LWExerciseVisualizer.py
 ```
 
 You should then see 3 plots appear, one at a time, one after the other.
@@ -62,7 +62,10 @@ To run functional tests:
 $ python3 include/test_suite.py func
 ```
 
-You will then see 3 plots appear, one after the other.
+You will then see 3 plots appear, one after the other. Compare these plots with
+[`exercise_tracking_test_1.xlsx`](include/exercise_tracking_test_1.xlsx) and
+[`exercise_tracking_test_2.xlsx`](include/exercise_tracking_test_2.xlsx) to confirm the correct
+behavior.
 
 ## Third-Party Tools
 

@@ -3,6 +3,7 @@
 from functools import reduce
 import datetime
 import collections
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -155,7 +156,7 @@ def read_data(file_name):
 
 
 def main():
-    exercise_data = read_data('Exercise tracker.xlsx')
+    exercise_data = read_data(f'{os.path.dirname(__file__)}/exercise_tracker.xlsx')
     frequency_vs_months_chart(exercise_data)
     frequency_vs_day_chart(exercise_data)
     frequency_vs_exercise_type(exercise_data)
@@ -164,3 +165,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
